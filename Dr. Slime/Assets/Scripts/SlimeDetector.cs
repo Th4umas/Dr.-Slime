@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class SlimeDetector : MonoBehaviour
 {
-    public Transform Player;  // Assign player here
-    public GameObject FocusSlime;  // The closest slime
+    public Transform Player;  
+    public GameObject FocusSlime; 
 
-    private HashSet<GameObject> detectedSlimes = new HashSet<GameObject>();  // Stores slimes in range
+    private HashSet<GameObject> detectedSlimes = new HashSet<GameObject>();  
 
     void OnTriggerEnter(Collider other)
     {
@@ -22,7 +22,6 @@ public class SlimeDetector : MonoBehaviour
         {
             detectedSlimes.Remove(other.gameObject);
 
-            // If the removed slime was the focus, update the closest slime
             if (FocusSlime == other.gameObject)
             {
                 FocusSlime = null;
@@ -34,6 +33,16 @@ public class SlimeDetector : MonoBehaviour
     void Update()
     {
         FindClosestSlime();
+
+
+        if (FocusSlime != null && Input.GetKeyDown("space"))
+        {
+            Slime slimeScript = FocusSlime.GetComponent<Slime>();
+            if (slimeScript != null)
+            {
+                slimeScript.captured();
+            }
+        }
     }
 
     void FindClosestSlime()
@@ -43,7 +52,7 @@ public class SlimeDetector : MonoBehaviour
 
         foreach (GameObject slime in detectedSlimes)
         {
-            if (slime == null) continue;  // Skip destroyed slimes
+            if (slime == null) continue;  
 
             float distance = Vector3.Distance(Player.position, slime.transform.position);
             if (distance < closestDistance)
@@ -52,8 +61,7 @@ public class SlimeDetector : MonoBehaviour
                 closestSlime = slime;
             }
         }
-
-        // Set FocusSlime to the closest slime found
+         
         FocusSlime = closestSlime;
     }
 }

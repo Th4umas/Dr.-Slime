@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Slime : MonoBehaviour
 {
-    public float waitTime = 3f;  // Time before moving
-    public float moveTime = 2f;  // Time spent moving
-    public float moveSpeed = 2f;  // Speed of movement
+    public float waitTime = 3f;
+    public float moveTime = 2f;
+    public float moveSpeed = 2f;
 
     void Start()
     {
@@ -32,5 +32,11 @@ public class Slime : MonoBehaviour
             transform.position += randomDirection * moveSpeed * Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void captured()
+    {
+        Debug.Log("GAH");
+        Destroy(gameObject);
     }
 }
