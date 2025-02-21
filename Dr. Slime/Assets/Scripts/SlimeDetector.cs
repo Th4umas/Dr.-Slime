@@ -4,7 +4,9 @@ using UnityEngine;
 public class SlimeDetector : MonoBehaviour
 {
     public Transform Player;  
-    public GameObject FocusSlime; 
+    public GameObject FocusSlime;
+
+    public GM gameMaster;
 
     private HashSet<GameObject> detectedSlimes = new HashSet<GameObject>();  
 
@@ -34,15 +36,26 @@ public class SlimeDetector : MonoBehaviour
     {
         FindClosestSlime();
 
-
-        if (FocusSlime != null && Input.GetKeyDown("space"))
+        if(FocusSlime != null)
         {
-            Slime slimeScript = FocusSlime.GetComponent<Slime>();
-            if (slimeScript != null)
+            gameMaster.captureUI = true;
+
+            if (Input.GetKeyDown("space"))
             {
-                slimeScript.captured();
+                Slime slimeScript = FocusSlime.GetComponent<Slime>();
+                if (slimeScript != null)
+                {
+                    slimeScript.captured();
+                    gameMaster.capture(1);
+                }
             }
         }
+        else
+        {
+
+            gameMaster.captureUI = false;
+        }
+
     }
 
     void FindClosestSlime()
