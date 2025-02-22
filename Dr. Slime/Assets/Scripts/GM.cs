@@ -52,24 +52,24 @@ public class GM : MonoBehaviour
 
 
 
-        data.cannabis = canna;
-        data.champignons = champi;
-        data.crack = crack;
+        canna=data.cannabis;
+        champi=data.champignons  ;
+        crack=data.crack  ;
     }
 
     public void capture(int type)
     {
         if (type == 1)
         {
-            canna += 1;
+            data.cannabis += 1;
         }
         if (type == 2)
         {
-            champi += 1;
+            data.champignons += 1;
         }
         if (type == 3)
         {
-            crack += 1;
+            data.crack += 1;
         }
     }
 
