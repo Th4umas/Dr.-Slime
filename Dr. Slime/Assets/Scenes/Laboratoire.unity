@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &42576808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42576809}
+  m_Layer: 0
+  m_Name: becherwaypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &42576809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42576808}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.25, y: 0.75, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &73518678
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +273,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc97f838e92a364b86d0a30d9f3b9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fluids: 
+  finished: {fileID: 6313254228567498277, guid: 46c9a11fc86c4bb42a6866cb3bff88e7, type: 3}
+  pour: {fileID: 6313254228567498277, guid: 159ead132b962794089b98647fc5c23d, type: 3}
+  box: {fileID: 1709985140}
+  bechertopTransform: {fileID: 475898096}
+  becherwaypoint: {fileID: 42576809}
+  boxwaypoint: {fileID: 403335735}
+  becherrightTransform: {fileID: 1470362987}
 --- !u!1 &132029998
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +546,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc97f838e92a364b86d0a30d9f3b9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fluids: 
+  finished: {fileID: 6313254228567498277, guid: 46c9a11fc86c4bb42a6866cb3bff88e7, type: 3}
+  pour: {fileID: 6313254228567498277, guid: 159ead132b962794089b98647fc5c23d, type: 3}
+  box: {fileID: 1709985140}
+  bechertopTransform: {fileID: 475898096}
+  becherwaypoint: {fileID: 42576809}
+  boxwaypoint: {fileID: 403335735}
+  becherrightTransform: {fileID: 1470362987}
 --- !u!1 &397371470
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +662,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397371470}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &403335734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403335735}
+  m_Layer: 0
+  m_Name: boxwaypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &403335735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403335734}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 0.771301, z: 1.6287931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &421211122
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +801,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421211122}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &475898095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475898096}
+  m_Layer: 0
+  m_Name: bechertopwaypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &475898096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475898095}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.75, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &476199100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,6 +1993,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1470362986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1470362987}
+  m_Layer: 0
+  m_Name: becherrightwaypoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1470362987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470362986}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.5, y: 0.771301, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1490368701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,6 +2421,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc97f838e92a364b86d0a30d9f3b9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fluids: 
+  finished: {fileID: 6313254228567498277, guid: 46c9a11fc86c4bb42a6866cb3bff88e7, type: 3}
+  pour: {fileID: 6313254228567498277, guid: 159ead132b962794089b98647fc5c23d, type: 3}
+  box: {fileID: 1709985140}
+  bechertopTransform: {fileID: 475898096}
+  becherwaypoint: {fileID: 42576809}
+  boxwaypoint: {fileID: 403335735}
+  becherrightTransform: {fileID: 1470362987}
 --- !u!1 &1613322187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,3 +3132,7 @@ SceneRoots:
   - {fileID: 1148364923}
   - {fileID: 1690414676}
   - {fileID: 1709985141}
+  - {fileID: 42576809}
+  - {fileID: 475898096}
+  - {fileID: 403335735}
+  - {fileID: 1470362987}

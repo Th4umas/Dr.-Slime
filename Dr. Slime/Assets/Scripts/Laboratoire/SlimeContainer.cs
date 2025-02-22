@@ -1,22 +1,45 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class SlimeContainer : MonoBehaviour
 {
     private MeshRenderer m_MeshRenderer;
 
-    private int slimeCount = 0;
     private string slimeType = "None";
 
     public List<int> fluids = new List<int>();
 
     public GameObject finished;
+    public GameObject pour;
+
+    public GameObject box;
+    private Transform boxTransform;
+
+    private Vector3 becherOriginalPosition;
+
+    private Transform becherTransform;
+
+    public Transform bechertopTransform;
+
+    public Transform becherwaypoint;
+    public Transform boxwaypoint;
+
+    public Transform becherrightTransform;
+
+    private Vector3 boxOriginalPosition;
 
     private void Start()
     {
+        becherTransform = transform;
+        boxTransform = box.transform;
+        boxOriginalPosition = box.transform.position;  // Store the box's original position
+        becherOriginalPosition = becherTransform.position; // Store the beaker's original position
         m_MeshRenderer = GetComponent<MeshRenderer>();
     }
+
+
 
     private void OnMouseDown()
     {
@@ -29,50 +52,139 @@ public class SlimeContainer : MonoBehaviour
 
     public void AddSlime(GameObject slime)
     {
-        slimeCount++;
 
         if (slime.GetComponent<LaboCanna>() != null)
         {
-            slimeType = "CannaContainer";
-            fluids.Add(1);
+            if(data.cannabis > 0)
+            {
+                slimeType = "CannaContainer";
+                fluids.Add(1);
+                data.cannabis--;
+            }
+
         }
         else if (slime.GetComponent<LaboChampi>() != null)
         {
-            slimeType = "ChampiContainer";
-            fluids.Add(2);
+            if (data.champignons > 0)
+            {
+                slimeType = "ChampiContainer";
+                fluids.Add(2);
+                data.champignons--;
+            }
+
         }
         else if (slime.GetComponent<LaboCrack>() != null)
         {
-            slimeType = "CrackContainer";
-            fluids.Add(3);
+            if (data.crack > 0)
+            {
+                slimeType = "CrackContainer";
+                fluids.Add(3);
+                data.crack--;
+            }
+
+
+
         }
 
-        Debug.Log("Slime added! Total count: " + slimeCount + " | Last Slime Type: " + slimeType);
+        Debug.Log("Slime added! Total count: " + fluids.Count + " | Last Slime Type: " + slimeType);
+        GameObject caca = Instantiate(pour, transform.position, Quaternion.identity);
+        Destroy(caca, 3f);
+        if (fluids.Count == 3)
+        {
+            StartCoroutine(packup());
+
+        }
+    }
+    public IEnumerator packup()
+    {
+        float moveSpeed = 5f; // Adjust movement speed as needed
+
+        // Instantiate the finished product and destroy it after 3 seconds
+        GameObject caca = Instantiate(finished, transform.position, Quaternion.identity);
+        Destroy(caca, 3f);
+        yield return new WaitForSeconds(1f);
+
+        // Move the beaker towards the "becherwaypoint" inside the box
+        yield return StartCoroutine(MoveObject(becherTransform, becherwaypoint.position, moveSpeed));
+
+        // Move the box and beaker together toward the "boxwaypoint"
+        yield return StartCoroutine(MoveObject(boxTransform, boxwaypoint.position, moveSpeed));
+
+
+        yield return StartCoroutine(MoveObject(becherTransform, becherrightTransform.position, moveSpeed));
+
+        // Process the contents and reset the container
+        Lethal(fluids);
+        fluids.Clear();
+        yield return new WaitForSeconds(1f);
+
+        // Move the box back to its original position (fix applied here)
+        yield return StartCoroutine(MoveObject(boxTransform, boxOriginalPosition, moveSpeed));
+
+        // Move the beaker up to "bechertopTransform"
+        yield return StartCoroutine(MoveObject(becherTransform, bechertopTransform.position, moveSpeed));
+
+        // Move the beaker back down to its original position
+        yield return StartCoroutine(MoveObject(becherTransform, becherOriginalPosition, moveSpeed));
+
+        Debug.Log("Beaker and box returned to original positions smoothly!");
     }
 
-    private void Update()
+
+
+    private IEnumerator MoveObject(Transform obj, Vector3 targetPosition, float speed)
     {
-        if(slimeCount ==1)
+        Vector3 startPosition = obj.position;
+        float distance = Vector3.Distance(startPosition, targetPosition);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < distance / speed) // Ensures movement time scales with distance
         {
-            m_MeshRenderer.material.color = Color.blue;
+            obj.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / (distance / speed));
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
-        if(slimeCount == 3)
-        {
-            //fluidcheck(fluids);
-            m_MeshRenderer.material.color = Color.red;
-            Instantiate(finished, transform.position, Quaternion.identity);
-        }
+        obj.position = targetPosition; // Snap to final position to avoid precision errors
     }
 
-    //when the container has three ingredients, it either blows up or becomes something sellable
-    /*
-    public bool fluidcheck(List l)
+
+
+
+    //calculates the money
+    public void Lethal(List<int> l)
     {
-        for (int i = 0) ;
+        int count2 = 0;
+        int count3 = 0;
+        int transaction = 0;
+
+
+        foreach (int num in l)
         {
-            
+            if (num == 1)
+            {
+                transaction += 50;
+            }
+            if (num == 2)
+            {
+                count2++;
+                transaction += 100;
+            }
+
+            if (num == 3)
+            {
+                count3++;
+                transaction += 200;
+            }
+
+            if (count2 >= 3 || count3 >= 2)
+            {
+                Debug.Log("lethal");
+                data.money -= transaction / 2;
+                return;
+            }
         }
-        return false;
-    }*/
+        data.money += transaction;
+        Debug.Log("you good");
+    }
 }

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7153693366889953349}
   - component: {fileID: 4586582304659348973}
   - component: {fileID: 7934030650919572145}
+  - component: {fileID: 5592500244949145215}
+  - component: {fileID: -8195209766697883398}
   m_Layer: 0
   m_Name: Crackslime
   m_TagString: Slime
@@ -121,10 +123,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff951bc64be43041a36b0560bbb0011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTimemin: 3
-  waitTimemax: 5
-  moveTimeMin: 1
-  moveTimeMax: 3
-  moveSpeedMin: 1
-  moveSpeedMax: 3
-  gameMaster: {fileID: 0}
+  wanderRadius: 10
+  waitTimeMin: 3
+  waitTimeMax: 6
+--- !u!195 &5592500244949145215
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483642801132220589}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 4.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-8195209766697883398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5483642801132220589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408b2fa2c2f3ee44bb24f63dc09bb954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fleeDistance: 9
+  fleeSpeed: 5

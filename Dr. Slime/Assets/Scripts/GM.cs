@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class GM : MonoBehaviour
 {
-    
 
     //UI
     public bool captureUI = false;
@@ -26,11 +25,12 @@ public class GM : MonoBehaviour
 
     void Update()
     {
-        cannaText.text = "CANNA\nSLIMES : " + canna;
 
-        champiText.text = "CHAMPI\nSLIMES : " + champi;
+        cannaText.text = "GREEN\nSLIMES : " + canna;
 
-        crackText.text = "CRACK\nSLIMES : " + crack;
+        champiText.text = "YELLOW\nSLIMES : " + champi;
+
+        crackText.text = "WHITE\nSLIMES : " + crack;
 
         if (captureUI && !rentrerUI)
         {

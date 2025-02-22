@@ -1,6 +1,5 @@
 using UnityEngine;
-using System.Collections;
-using UnityEditor;
+using UnityEngine.AI;
 
 public class SlimeSpawner : MonoBehaviour
 {
@@ -8,49 +7,41 @@ public class SlimeSpawner : MonoBehaviour
     public Slime champiPrefab;
     public Slime crackPrefab;
 
-    public int maxCanna = 25;
-    public int minCanna = 15;
-    public int maxChampi = 20;
-    public int minChampi = 10;
-    public int maxCrack = 15;
-    public int minCrack = 5;
+    public int maxCanna = 25, minCanna = 15;
+    public int maxChampi = 20, minChampi = 10;
+    public int maxCrack = 15, minCrack = 5;
 
-    private Vector3 pos;
+    public float spawnRadius = 20f;
+    public LayerMask navMeshLayer;
 
     void Start()
     {
-        spawn();
+        SpawnSlimes(cannaPrefab, Random.Range(minCanna, maxCanna));
+        SpawnSlimes(champiPrefab, Random.Range(minChampi, maxChampi));
+        SpawnSlimes(crackPrefab, Random.Range(minCrack, maxCrack));
     }
 
-    private void spawn()
+    private void SpawnSlimes(Slime slimePrefab, int amount)
     {
-        int randomSpawn = Random.Range(minCanna, maxCanna);
-
-        while (randomSpawn > 0)
+        for (int i = 0; i < amount; i++)
         {
-            randomSpawn--;
-            pos = new Vector3(Random.Range(-15, 15), 0.5f, Random.Range(-15, 15));
-            Instantiate(cannaPrefab, pos, Quaternion.identity);
+            Vector3 spawnPoint = GetRandomNavMeshPosition();
+            if (spawnPoint != Vector3.zero)
+            {
+                Instantiate(slimePrefab, spawnPoint, Quaternion.identity);
+            }
         }
-
-        int randomSpawne = Random.Range(minChampi, maxChampi);
-
-        while (randomSpawne > 0)
-        {
-            randomSpawne--;
-            pos = new Vector3(Random.Range(-20, 20), 0.5f, Random.Range(-20, 20));
-            Instantiate(champiPrefab, pos, Quaternion.identity);
-        }
-
-        int randomSpawner = Random.Range(minCrack, maxCrack);
-
-        while (randomSpawner > 0)
-        {
-            randomSpawner--;
-            pos = new Vector3(Random.Range(-20, 20), 0.75f, Random.Range(-20, 20));
-            Instantiate(crackPrefab, pos, Quaternion.identity);
-        }
-
     }
 
+    private Vector3 GetRandomNavMeshPosition()
+    {
+        Vector3 randomPoint = Random.insideUnitSphere * spawnRadius;
+        randomPoint.y = 0;  // Keep it on the ground
+
+        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, spawnRadius, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        return Vector3.zero;  // If no valid position found, return zero (invalid spawn)
+    }
 }

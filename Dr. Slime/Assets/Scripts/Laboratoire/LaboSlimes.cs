@@ -19,7 +19,7 @@ public class LaboSlimes : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             SceneManager.LoadScene(0);
         }

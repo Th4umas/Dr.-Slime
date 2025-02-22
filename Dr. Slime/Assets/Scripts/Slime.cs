@@ -1,54 +1,49 @@
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 
 public class Slime : MonoBehaviour
 {
-    public float waitTimemin = 3f;
-    public float waitTimemax = 5f;
-    public float moveTimeMin = 1f; 
-    public float moveTimeMax = 3f; 
-    public float moveSpeedMin = 1f;
-    public float moveSpeedMax = 3f;
+    private NavMeshAgent agent;
 
-    public GM gameMaster;
+    public float wanderRadius = 10f;
+    public float waitTimeMin = 3f;
+    public float waitTimeMax = 6f;
 
     void Start()
     {
-        StartCoroutine(MovementLoop());
-
-        gameMaster = GetComponent<GM>();
+        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(Wander());
     }
 
-    private IEnumerator MovementLoop()
+    private IEnumerator Wander()
     {
-        yield return new WaitForSeconds(Random.Range(0f, 3f));
-
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(waitTimemin, waitTimemax));
+            // Pick a random destination within the allowed radius
+            Vector3 newPos = GetRandomNavMeshPosition();
+            agent.SetDestination(newPos);
 
-            StartCoroutine(MoveRandomly());
+            // Wait before moving again
+            yield return new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax));
         }
     }
 
-    private IEnumerator MoveRandomly()
+    private Vector3 GetRandomNavMeshPosition()
     {
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        float randomMoveTime = Random.Range(moveTimeMin, moveTimeMax); 
-        float randomSpeed = Random.Range(moveSpeedMin, moveSpeedMax);  
+        Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
+        randomDirection += transform.position;
 
-        float startTime = Time.time;
-
-        while (Time.time < startTime + randomMoveTime)
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
         {
-            transform.position += randomDirection * randomSpeed * Time.deltaTime;
-            yield return null;
+            return hit.position;
         }
+        return transform.position;  // If no valid position found, stay in place
     }
-
     public virtual void captured()
     {
         Destroy(gameObject);
     }
-
 }
+
+
