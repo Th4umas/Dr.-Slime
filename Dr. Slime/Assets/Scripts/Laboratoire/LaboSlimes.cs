@@ -2,16 +2,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-
 public class LaboSlimes : MonoBehaviour
 {
     private Vector3 startPosition;
-    public SlimeContainer container;
+    public static LaboSlimes selectedSlime = null; // Static so only one slime is selected at a time
 
     public float hoverHeight = 0.2f;
     public float hoverSpeed = 5f;
 
-    private static LaboSlimes selectedSlime = null;
     private bool isSelected = false;
 
     void Start()
@@ -51,10 +49,7 @@ public class LaboSlimes : MonoBehaviour
     {
         if (isSelected)
         {
-            isSelected = false;
-            selectedSlime = null;
-            StopAllCoroutines();
-            StartCoroutine(MoveObject(transform.position, startPosition));
+            Deselect();
         }
         else
         {
@@ -67,17 +62,13 @@ public class LaboSlimes : MonoBehaviour
             selectedSlime = this;
             StopAllCoroutines();
             StartCoroutine(MoveObject(transform.position, startPosition + new Vector3(0, hoverHeight, 0)));
-
-            if (container != null)
-            {
-                container.AddSlime(gameObject);
-            }
         }
     }
 
     public void Deselect()
     {
         isSelected = false;
+        selectedSlime = null;
         StopAllCoroutines();
         StartCoroutine(MoveObject(transform.position, startPosition));
     }

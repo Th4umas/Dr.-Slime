@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 73518681}
   - component: {fileID: 73518680}
   - component: {fileID: 73518679}
+  - component: {fileID: 73518683}
   m_Layer: 0
   m_Name: Becher
   m_TagString: Untagged
@@ -229,6 +230,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &73518683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73518678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc97f838e92a364b86d0a30d9f3b9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &132029998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,7 +2030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20049cb009d2aee488a398c11a70cd61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 384115909}
   hoverHeight: 0.2
   hoverSpeed: 5
 --- !u!1 &1523514286
@@ -2415,7 +2427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ae4d072b1935347905ae8a22e9535b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 384115909}
   hoverHeight: 0.2
   hoverSpeed: 5
 --- !u!1 &1660174981
@@ -2953,7 +2964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99feef1cb453cd84fbc0629576793aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 384115909}
   hoverHeight: 0.2
   hoverSpeed: 5
 --- !u!1660057539 &9223372036854775807
