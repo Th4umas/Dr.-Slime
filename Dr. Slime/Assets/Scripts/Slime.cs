@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Slime : MonoBehaviour
+public class SlimeController : MonoBehaviour
 {
     public float waitTimemin = 3f;
     public float waitTimemax = 5f;
@@ -10,9 +10,13 @@ public class Slime : MonoBehaviour
     public float moveSpeedMin = 1f;
     public float moveSpeedMax = 3f;
 
+    public GM gameMaster;
+
     void Start()
     {
         StartCoroutine(MovementLoop());
+
+        gameMaster = GetComponent<GM>();
     }
 
     private IEnumerator MovementLoop()
@@ -42,9 +46,16 @@ public class Slime : MonoBehaviour
         }
     }
 
-    public void captured()
+    public virtual void captured()
     {
-        Debug.Log("GAH");
-        Destroy(gameObject);
+        StartCoroutine (capture(1));
+
+    }
+
+    public IEnumerator capture(int type)
+    {
+        Destroy(gameObject, 1f);
+        yield return new WaitForSeconds(.9f);
+        gameMaster.capture(type);
     }
 }

@@ -7,9 +7,11 @@ public class GM : MonoBehaviour
     public bool captureUI = false;
     public bool rentrerUI = false;
 
-    public int slimes1 = 0;
+    public int canna = 0;
+    public int champi = 0;
 
-    public Text slimesOne;
+    public Text cannaText;
+    public Text champiText;
     public GameObject CapturePanel;
     public GameObject RentrerPanel;
     void Start()
@@ -20,7 +22,9 @@ public class GM : MonoBehaviour
 
     void Update()
     {
-        slimesOne.text = "SLIMES : "+ slimes1;
+        cannaText.text = "CANNA\nSLIMES : " + canna;
+
+        champiText.text = "CHAMPI\nSLIMES : " + champi;
 
         if (captureUI && !rentrerUI)
         {
@@ -45,7 +49,11 @@ public class GM : MonoBehaviour
     {
         if (type == 1)
         {
-            slimes1 += 1;
+            canna += 1;
+        }
+        if (type == 2)
+        {
+            champi += 1;
         }
     }
 

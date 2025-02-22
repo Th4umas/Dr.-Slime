@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class SlimeHeritage : MonoBehaviour
+public class ChampiContainer : SlimeController
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public override void captured()
     {
-        
+
+        StartCoroutine(capture(2));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

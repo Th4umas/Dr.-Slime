@@ -43,11 +43,10 @@ public class SlimeDetector : MonoBehaviour
 
             if (Input.GetKeyDown("space"))
             {
-                Slime slimeScript = FocusSlime.GetComponent<Slime>();
+                SlimeController slimeScript = FocusSlime.GetComponent<SlimeController>();
                 if (slimeScript != null)
                 {
                     slimeScript.captured();
-                    gameMaster.capture(1);
                 }
             }
         }

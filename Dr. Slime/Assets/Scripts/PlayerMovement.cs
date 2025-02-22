@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraTransform;
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
-    public float gravity = -9.81f;  // Gravity strength
+    public float gravity = -9.81f;
     private float turnSmoothVelocity;
     private Vector3 velocity;
 
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            velocity.y = -2f;  // Small downward force to keep grounded
+            velocity.y = -2f;
         }
 
         controller.Move(velocity * Time.deltaTime);
