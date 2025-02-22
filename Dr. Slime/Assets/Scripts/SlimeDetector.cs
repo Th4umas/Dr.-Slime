@@ -22,6 +22,7 @@ public class SlimeDetector : MonoBehaviour
     {
         if (other.CompareTag("Slime"))
         {
+
             detectedSlimes.Remove(other.gameObject);
 
             if (FocusSlime == other.gameObject)
