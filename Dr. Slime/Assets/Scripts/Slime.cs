@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SlimeController : MonoBehaviour
+public class Slime : MonoBehaviour
 {
     public float waitTimemin = 3f;
     public float waitTimemax = 5f;
@@ -48,14 +48,7 @@ public class SlimeController : MonoBehaviour
 
     public virtual void captured()
     {
-        StartCoroutine (capture(1));
-
+        Destroy(gameObject);
     }
 
-    public IEnumerator capture(int type)
-    {
-        Destroy(gameObject, 1f);
-        yield return new WaitForSeconds(.9f);
-        gameMaster.capture(type);
-    }
 }

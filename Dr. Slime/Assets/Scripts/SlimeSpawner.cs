@@ -4,13 +4,16 @@ using UnityEditor;
 
 public class SlimeSpawner : MonoBehaviour
 {
-    public SlimeController cannaPrefab;
-    public SlimeController champiPrefab;
+    public Slime cannaPrefab;
+    public Slime champiPrefab;
+    public Slime crackPrefab;
 
     public int maxCanna = 25;
     public int minCanna = 15;
     public int maxChampi = 20;
     public int minChampi = 10;
+    public int maxCrack = 15;
+    public int minCrack = 5;
 
     private Vector3 pos;
 
@@ -36,7 +39,18 @@ public class SlimeSpawner : MonoBehaviour
         {
             randomSpawne--;
             pos = new Vector3(Random.Range(-20, 20), 0.5f, Random.Range(-20, 20));
-            Instantiate(champiPrefab, pos, Quaternion.identity);
+            Slime newchampi = Instantiate(champiPrefab, pos, Quaternion.identity);
+            newchampi.gameMaster = GetComponent<GM>();
+        }
+
+        int randomSpawner = Random.Range(minCrack, maxCrack);
+
+        while (randomSpawner > 0)
+        {
+            randomSpawner--;
+            pos = new Vector3(Random.Range(-20, 20), 0.75f, Random.Range(-20, 20));
+            Slime newchampi = Instantiate(crackPrefab, pos, Quaternion.identity);
+            newchampi.gameMaster = GetComponent<GM>();
         }
 
     }

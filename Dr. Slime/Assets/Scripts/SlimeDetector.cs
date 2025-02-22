@@ -43,10 +43,19 @@ public class SlimeDetector : MonoBehaviour
 
             if (Input.GetKeyDown("space"))
             {
-                SlimeController slimeScript = FocusSlime.GetComponent<SlimeController>();
-                if (slimeScript != null)
+                Slime slimeScript = FocusSlime.GetComponent<Slime>();
+                slimeScript.captured();
+                if (FocusSlime.GetComponent<CannaContainer>())
                 {
-                    slimeScript.captured();
+                    gameMaster.capture(1);
+                }
+                else if (FocusSlime.GetComponent<ChampiContainer>())
+                {
+                    gameMaster.capture(2);
+                }
+                else if (FocusSlime.GetComponent<CrackContainer>())
+                {
+                    gameMaster.capture(3);
                 }
             }
         }
@@ -54,6 +63,12 @@ public class SlimeDetector : MonoBehaviour
         {
 
             gameMaster.captureUI = false;
+        }
+
+        if (FocusSlime != null)
+        {
+            // Check which class the enemy belongs to
+
         }
 
     }
