@@ -1505,8 +1505,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1259330576}
-  - component: {fileID: 1259330578}
   - component: {fileID: 1259330577}
+  - component: {fileID: 1259330578}
   m_Layer: 0
   m_Name: SlimeDetector
   m_TagString: Untagged
@@ -1544,8 +1544,8 @@ MonoBehaviour:
   Player: {fileID: 115386278}
   FocusSlime: {fileID: 0}
   gameMaster: {fileID: 1990990138}
---- !u!136 &1259330578
-CapsuleCollider:
+--- !u!65 &1259330578
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1562,11 +1562,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.15
-  m_Height: 6.86
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 1.5}
 --- !u!1 &1385687454
 GameObject:
   m_ObjectHideFlags: 0

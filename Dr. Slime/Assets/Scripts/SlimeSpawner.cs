@@ -39,8 +39,7 @@ public class SlimeSpawner : MonoBehaviour
         {
             randomSpawne--;
             pos = new Vector3(Random.Range(-20, 20), 0.5f, Random.Range(-20, 20));
-            Slime newchampi = Instantiate(champiPrefab, pos, Quaternion.identity);
-            newchampi.gameMaster = GetComponent<GM>();
+            Instantiate(champiPrefab, pos, Quaternion.identity);
         }
 
         int randomSpawner = Random.Range(minCrack, maxCrack);
@@ -49,8 +48,7 @@ public class SlimeSpawner : MonoBehaviour
         {
             randomSpawner--;
             pos = new Vector3(Random.Range(-20, 20), 0.75f, Random.Range(-20, 20));
-            Slime newchampi = Instantiate(crackPrefab, pos, Quaternion.identity);
-            newchampi.gameMaster = GetComponent<GM>();
+            Instantiate(crackPrefab, pos, Quaternion.identity);
         }
 
     }

@@ -23,8 +23,8 @@ public class LM : MonoBehaviour
         nbchampi = data.champignons;
         nbcrack = data.crack;
 
-        txtcanna.text = ""+nbcanna;
-        txtchampi.text = "" + nbchampi;
-        txtcrack.text = "" + nbcrack;
+        txtcanna.text = "CANNASLIME : "+nbcanna;
+        txtchampi.text = "CHAMPISLIME : " + nbchampi;
+        txtcrack.text = "CRACKSLIME : " + nbcrack;
     }
 }

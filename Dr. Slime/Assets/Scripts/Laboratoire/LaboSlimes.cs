@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+
 public class LaboSlimes : MonoBehaviour
 {
     private Vector3 startPosition;
+    public SlimeContainer container;
 
     public float hoverHeight = 0.2f;
     public float hoverSpeed = 5f;
@@ -65,6 +67,11 @@ public class LaboSlimes : MonoBehaviour
             selectedSlime = this;
             StopAllCoroutines();
             StartCoroutine(MoveObject(transform.position, startPosition + new Vector3(0, hoverHeight, 0)));
+
+            if (container != null)
+            {
+                container.AddSlime(gameObject);
+            }
         }
     }
 
