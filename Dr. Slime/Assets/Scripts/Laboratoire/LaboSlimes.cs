@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LaboSlimes : MonoBehaviour
 {
-    private MeshRenderer m_meshrenderer;
-    //private Animator m_animator;
+    private Vector3 startPosition;
 
-    public Color hoverColor = Color.gray;
-    private Color startColor;
+    public float hoverHeight = 0.2f;
+    public float hoverSpeed = 5f;
+
+    private static LaboSlimes selectedSlime = null;
+    private bool isSelected = false;
+
     void Start()
     {
-        //m_animator = GetComponent<Animator>();
-        m_meshrenderer = GetComponent<MeshRenderer>();
-
-        startColor = m_meshrenderer.material.color;
+        startPosition = transform.position;
     }
 
     void Update()
@@ -26,20 +27,63 @@ public class LaboSlimes : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        m_meshrenderer.material.color = hoverColor;
+        if (selectedSlime != null && selectedSlime != this) return;
+
+        if (!isSelected)
+        {
+            StopAllCoroutines();
+            StartCoroutine(MoveObject(transform.position, startPosition + new Vector3(0, hoverHeight, 0)));
+        }
     }
+
     private void OnMouseExit()
     {
-        m_meshrenderer.material.color = startColor;
+        if (!isSelected)
+        {
+            StopAllCoroutines();
+            StartCoroutine(MoveObject(transform.position, startPosition));
+        }
     }
 
     private void OnMouseDown()
     {
-        select();
+        if (isSelected)
+        {
+            isSelected = false;
+            selectedSlime = null;
+            StopAllCoroutines();
+            StartCoroutine(MoveObject(transform.position, startPosition));
+        }
+        else
+        {
+            if (selectedSlime != null)
+            {
+                selectedSlime.Deselect();
+            }
+
+            isSelected = true;
+            selectedSlime = this;
+            StopAllCoroutines();
+            StartCoroutine(MoveObject(transform.position, startPosition + new Vector3(0, hoverHeight, 0)));
+        }
     }
 
-    private void select()
+    public void Deselect()
     {
-        //m_animator.SetBool("select", true);
+        isSelected = false;
+        StopAllCoroutines();
+        StartCoroutine(MoveObject(transform.position, startPosition));
+    }
+
+    private IEnumerator MoveObject(Vector3 from, Vector3 to)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            transform.position = Vector3.Lerp(from, to, elapsedTime);
+            elapsedTime += Time.deltaTime * hoverSpeed;
+            yield return null;
+        }
+        transform.position = to;
     }
 }
