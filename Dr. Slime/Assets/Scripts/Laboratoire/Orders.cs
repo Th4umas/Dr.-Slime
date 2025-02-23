@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Orders : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Orders : MonoBehaviour
 
     public List<string> chances = new List<string>();
     public List<int> yo = new List<int>();
+
+    public Text ingredient1;
+    public Text ingredient2;
 
     void Start()
     {
@@ -31,8 +35,43 @@ public class Orders : MonoBehaviour
         return true;
     }
 
+    public void completeorder()
+    {
+        Order(enquiry());
+    }
+
+    private void Order(List<int> cac)
+    {
+        if( cac[0] == 1)
+        {
+            ingredient1.text = "INGREDIENT 1 : cannabis";
+        }
+        else if( cac[0] == 2)
+        {
+            ingredient1.text = "INGREDIENT 1 : datura";
+        }
+        else if ( cac[0] == 3)
+        {
+            ingredient1.text = "INGREDIENT 1 : MDMA";
+        }
+
+        if (cac[1] == 1)
+        {
+            ingredient2.text = "INGREDIENT 2 : cannabis";
+        }
+        else if (cac[1] == 2)
+        {
+            ingredient2.text = "INGREDIENT 2 : datura";
+        }
+        else if (cac[1] == 3)
+        {
+            ingredient2.text = "INGREDIENT 2 : MDMA";
+        }
+    }
+
     private List<int> enquiry()
     {
+        yo.Clear();
         //1
         if (flipacoin())
         {
@@ -106,8 +145,10 @@ public class Orders : MonoBehaviour
                 yo.Add(3);
             }
         }*/
+        Debug.Log(yo);
         return yo;  
     }
+
 
     
     private IEnumerator order()

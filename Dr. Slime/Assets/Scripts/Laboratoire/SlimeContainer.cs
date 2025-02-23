@@ -9,6 +9,8 @@ public class SlimeContainer : MonoBehaviour
 
     private string slimeType = "None";
 
+    public int numéro = 0;
+
     public List<int> fluids = new List<int>();
 
     public GameObject finished;
@@ -29,6 +31,8 @@ public class SlimeContainer : MonoBehaviour
     public Transform becherrightTransform;
 
     private Vector3 boxOriginalPosition;
+
+    public bool canAdd = true;
 
     private void Start()
     {
@@ -52,47 +56,58 @@ public class SlimeContainer : MonoBehaviour
 
     public void AddSlime(GameObject slime)
     {
-
-        if (slime.GetComponent<LaboCanna>() != null)
+        if (canAdd)
         {
-            if(data.cannabis > 0)
+            if (slime.GetComponent<LaboCanna>() != null)
             {
-                slimeType = "CannaContainer";
-                fluids.Add(1);
-                data.cannabis--;
+                if(data.cannabis > 0)
+                {
+                    slimeType = "CannaContainer";
+                    fluids.Add(1);
+                    data.cannabis--;
+                    Debug.Log("Slime added! Total count: " + fluids.Count + " | Last Slime Type: " + slimeType);
+                    GameObject caca = Instantiate(pour, transform.position, Quaternion.identity);
+                    Destroy(caca, 3f);
+                }
+
+            }
+            else if (slime.GetComponent<LaboChampi>() != null)
+            {
+                if (data.champignons > 0)
+                {
+                    slimeType = "ChampiContainer";
+                    fluids.Add(2);
+                    data.champignons--;
+                    Debug.Log("Slime added! Total count: " + fluids.Count + " | Last Slime Type: " + slimeType);
+                    GameObject caca = Instantiate(pour, transform.position, Quaternion.identity);
+                    Destroy(caca, 3f);
+                }
+
+            }
+            else if (slime.GetComponent<LaboCrack>() != null)
+            {
+                if (data.crack > 0)
+                {
+                    slimeType = "CrackContainer";
+                    fluids.Add(3);
+                    data.crack--;
+                    Debug.Log("Slime added! Total count: " + fluids.Count + " | Last Slime Type: " + slimeType);
+                    GameObject caca = Instantiate(pour, transform.position, Quaternion.identity);
+                    Destroy(caca, 3f);
+                }
+
             }
 
         }
-        else if (slime.GetComponent<LaboChampi>() != null)
+
+
+
+
+
+        if (fluids.Count == 2)
         {
-            if (data.champignons > 0)
-            {
-                slimeType = "ChampiContainer";
-                fluids.Add(2);
-                data.champignons--;
-            }
-
-        }
-        else if (slime.GetComponent<LaboCrack>() != null)
-        {
-            if (data.crack > 0)
-            {
-                slimeType = "CrackContainer";
-                fluids.Add(3);
-                data.crack--;
-            }
-
-
-
-        }
-
-        Debug.Log("Slime added! Total count: " + fluids.Count + " | Last Slime Type: " + slimeType);
-        GameObject caca = Instantiate(pour, transform.position, Quaternion.identity);
-        Destroy(caca, 3f);
-        if (fluids.Count == 3)
-        {
-            StartCoroutine(packup());
-
+            //StartCoroutine(packup());
+            canAdd = false;
         }
     }
     public IEnumerator packup()

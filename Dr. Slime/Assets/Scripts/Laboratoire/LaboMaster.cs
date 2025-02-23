@@ -10,6 +10,7 @@ public class LM : MonoBehaviour
     public Text txtcanna;
     public Text txtchampi;
     public Text txtcrack;
+    public Text money;
 
     void Start()
     {
@@ -23,8 +24,9 @@ public class LM : MonoBehaviour
         nbchampi = data.champignons;
         nbcrack = data.crack;
 
-        txtcanna.text = "CANNASLIME : "+nbcanna;
-        txtchampi.text = "CHAMPISLIME : " + nbchampi;
-        txtcrack.text = "CRACKSLIME : " + nbcrack;
+        txtcanna.text = "SLIME VERT : "+nbcanna;
+        txtchampi.text = "SLIME JAUNE : " + nbchampi;
+        txtcrack.text = "SLIME BLANC : " + nbcrack;
+        money.text = ""+data.money;
     }
 }

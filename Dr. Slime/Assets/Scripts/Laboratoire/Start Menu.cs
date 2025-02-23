@@ -23,4 +23,14 @@ public class StartMenu : MonoBehaviour
     {
         mapping.SetActive(false);
     }
+
+    public void exitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; // Stop play mode in Unity Editor
+        #else
+            Application.Quit(); // Close the game in a build
+        #endif
+
+    }
 }
