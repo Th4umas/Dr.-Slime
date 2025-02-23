@@ -7,7 +7,7 @@ public class Orders : MonoBehaviour
 {
     public LM lm;
 
-    public List<string> chances = new List<string>();
+    //public List<string> chances = new List<string>();
     public List<int> yo = new List<int>();
 
     public Text ingredient1;
@@ -15,9 +15,9 @@ public class Orders : MonoBehaviour
 
     void Start()
     {
-        chances.Add("green");
-        chances.Add("yellow");
-        chances.Add("white");
+        //chances.Add("green");
+        //chances.Add("yellow");
+        //chances.Add("white");
     }
 
     void Update()
@@ -35,12 +35,33 @@ public class Orders : MonoBehaviour
         return true;
     }
 
+    private bool ordercheck(List<int> becher, List<int> order)
+    {
+        if (becher.Count != order.Count)
+            return false;
+
+        List<int> becherCopy = new List<int>(becher);
+        List<int> orderCopy = new List<int>(order);
+
+        becherCopy.Sort();
+        orderCopy.Sort();
+
+        for (int i = 0; i < becherCopy.Count; i++)
+        {
+            if (becherCopy[i] != orderCopy[i])
+                return false;
+        }
+
+        return true;
+    }
+
+
     public void completeorder()
     {
         Order(enquiry());
     }
 
-    private void Order(List<int> cac)
+    private List<int> Order(List<int> cac)
     {
         if( cac[0] == 1)
         {
@@ -67,6 +88,7 @@ public class Orders : MonoBehaviour
         {
             ingredient2.text = "INGREDIENT 2 : MDMA";
         }
+        return cac;
     }
 
     private List<int> enquiry()
