@@ -49,7 +49,7 @@ Material:
     - _Scale: 4.75
     - _VertexDisplacement: 0.02
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0.668427, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _DirectionDistortion: {r: 0, g: 0.49, b: 0, a: 0}
     - _DirectionSpeed: {r: 0.03, g: 0.2, b: 0, a: 0}
     - _MainDirectionSpeed: {r: 0.22, g: 0.2, b: 0, a: 0}
