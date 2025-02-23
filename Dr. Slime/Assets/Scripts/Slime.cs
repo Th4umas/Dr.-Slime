@@ -1,36 +1,49 @@
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 
 public class Slime : MonoBehaviour
 {
-    public float waitTime = 3f;  // Time before moving
-    public float moveTime = 2f;  // Time spent moving
-    public float moveSpeed = 2f;  // Speed of movement
+    private NavMeshAgent agent;
+
+    public float wanderRadius = 10f;
+    public float waitTimeMin = 3f;
+    public float waitTimeMax = 6f;
 
     void Start()
     {
-        StartCoroutine(MovementLoop());
+        agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(Wander());
     }
 
-    private IEnumerator MovementLoop()
+    private IEnumerator Wander()
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
+            // Pick a random destination within the allowed radius
+            Vector3 newPos = GetRandomNavMeshPosition();
+            agent.SetDestination(newPos);
 
-            StartCoroutine(MoveRandomly());
+            // Wait before moving again
+            yield return new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax));
         }
     }
 
-    private IEnumerator MoveRandomly()
+    private Vector3 GetRandomNavMeshPosition()
     {
-        Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-        float startTime = Time.time;
+        Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
+        randomDirection += transform.position;
 
-        while (Time.time < startTime + moveTime)
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
         {
-            transform.position += randomDirection * moveSpeed * Time.deltaTime;
-            yield return null;
+            return hit.position;
         }
+        return transform.position;  // If no valid position found, stay in place
+    }
+    public virtual void captured()
+    {
+        Destroy(gameObject);
     }
 }
+
+

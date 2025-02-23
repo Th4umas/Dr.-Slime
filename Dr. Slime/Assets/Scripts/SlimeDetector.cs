@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class SlimeDetector : MonoBehaviour
 {
-    public Transform Player;  // Assign player here
-    public GameObject FocusSlime;  // The closest slime
+    public Transform Player;  
+    public GameObject FocusSlime;
 
-    private HashSet<GameObject> detectedSlimes = new HashSet<GameObject>();  // Stores slimes in range
+    public GM gameMaster;
+
+    private HashSet<GameObject> detectedSlimes = new HashSet<GameObject>();  
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,9 +22,9 @@ public class SlimeDetector : MonoBehaviour
     {
         if (other.CompareTag("Slime"))
         {
+
             detectedSlimes.Remove(other.gameObject);
 
-            // If the removed slime was the focus, update the closest slime
             if (FocusSlime == other.gameObject)
             {
                 FocusSlime = null;
@@ -34,6 +36,41 @@ public class SlimeDetector : MonoBehaviour
     void Update()
     {
         FindClosestSlime();
+
+        if(FocusSlime != null)
+        {
+            gameMaster.captureUI = true;
+
+            if (Input.GetKeyDown("space"))
+            {
+                Slime slimeScript = FocusSlime.GetComponent<Slime>();
+                slimeScript.captured();
+                if (FocusSlime.GetComponent<CannaContainer>())
+                {
+                    gameMaster.capture(1);
+                }
+                else if (FocusSlime.GetComponent<ChampiContainer>())
+                {
+                    gameMaster.capture(2);
+                }
+                else if (FocusSlime.GetComponent<CrackContainer>())
+                {
+                    gameMaster.capture(3);
+                }
+            }
+        }
+        else
+        {
+
+            gameMaster.captureUI = false;
+        }
+
+        if (FocusSlime != null)
+        {
+            // Check which class the enemy belongs to
+
+        }
+
     }
 
     void FindClosestSlime()
@@ -43,7 +80,7 @@ public class SlimeDetector : MonoBehaviour
 
         foreach (GameObject slime in detectedSlimes)
         {
-            if (slime == null) continue;  // Skip destroyed slimes
+            if (slime == null) continue;  
 
             float distance = Vector3.Distance(Player.position, slime.transform.position);
             if (distance < closestDistance)
@@ -52,8 +89,7 @@ public class SlimeDetector : MonoBehaviour
                 closestSlime = slime;
             }
         }
-
-        // Set FocusSlime to the closest slime found
+         
         FocusSlime = closestSlime;
     }
 }
