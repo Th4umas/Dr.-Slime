@@ -217,6 +217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: datura
       objectReference: {fileID: 0}
+    - target: {fileID: 8042945548056573905, guid: 218d64767947fef469f1021610b35bdd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: af9e2222ab3f75c40ba7f68463b26eaa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4881227555538877020, guid: 218d64767947fef469f1021610b35bdd, type: 3}

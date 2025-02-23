@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cannabis
       objectReference: {fileID: 0}
+    - target: {fileID: 5513386478252090863, guid: fb3a36e3ad513974c9e2dc7f25c3e826, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c53d6697eeb05104cb425d816eaca07b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -1527951227331741890, guid: fb3a36e3ad513974c9e2dc7f25c3e826, type: 3}

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Wind
+  m_Name: M_Wind 1
   m_Shader: {fileID: -6465566751694194690, guid: d6fb20bbc301e6848a57e5ea99cfe6c5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -51,7 +51,7 @@ Material:
     - _WindIntensity: 2.17
     - _intensity: 1
     m_Colors:
-    - _Color: {r: 0.36225772, g: 0.4792453, b: 0.16547525, a: 1}
+    - _Color: {r: 0.6331038, g: 0.6377357, b: 0.2587041, a: 1}
     - _MaxWindDirection: {r: 6, g: 0, b: 0, a: 0}
     - _MinWindDirection: {r: 0.1, g: 0, b: 0, a: 0}
     - _WindDirection: {r: 6, g: 0, b: 0, a: 0}
