@@ -31,7 +31,7 @@ public class Orders : MonoBehaviour
         return true;
     }
 
-    private void enquiry()
+    private List<int> enquiry()
     {
         //1
         if (flipacoin())
@@ -88,7 +88,7 @@ public class Orders : MonoBehaviour
                 }
             }
         }
-
+        /*
         //3
         int Coin4 = Random.Range(0, 3);
         if (Coin4 == 0)
@@ -105,8 +105,8 @@ public class Orders : MonoBehaviour
             {
                 yo.Add(3);
             }
-        }
-
+        }*/
+        return yo;  
     }
 
     
